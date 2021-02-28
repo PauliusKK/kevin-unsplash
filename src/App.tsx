@@ -12,7 +12,7 @@ const unsplash = axios.create({
 unsplash.defaults.headers.common['Authorization'] = `Client-ID ${ACCESS_KEY}`;
 
 function App() {
-  const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState<any[]>([]);
 
   if (photos.length <= 1) {
     unsplash.get('/photos', {
@@ -22,7 +22,7 @@ function App() {
     })
     .then((response) => {
       console.log(response);
-      const photos = response.data.map((photo) => {
+      const photos = response.data.map((photo: any) => {
         const { id, urls } = photo;
         const { regular: source } = urls;
   
