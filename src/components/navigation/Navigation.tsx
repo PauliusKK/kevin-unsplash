@@ -8,9 +8,11 @@ import './scss/navigation.scss';
 
 export const Navigation = () => (
   <div className="navigation">
-    <div className="logo">
-      <img src={Logo} alt="kevin." />
-    </div>
+    <Link to="/">
+      <div className="logo">
+        <img src={Logo} alt="kevin." />
+      </div>
+    </Link>
     <div className="menu">
       <Link to="/photos">
         <div className="button">
