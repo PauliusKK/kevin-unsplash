@@ -1,0 +1,21 @@
+.masonry-container {
+  display: flex;
+  margin-left: -5px;
+  padding: 50px;
+  margin-left: 90px;
+  background-color: #2B2B2B;
+}
+
+.masonry-column {
+  padding-left: 25px;
+  background-clip: padding-box;
+}
+
+.photo-box {
+  margin-bottom: 22px;
+}
+
+.photo-box img {
+  width: 100%;
+  border-radius: 10px;
+}

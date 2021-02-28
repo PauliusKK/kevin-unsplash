@@ -1,0 +1,33 @@
+.navigation {
+    background-color: #3C3C3C;
+    width: 90px;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .logo {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
+    }
+
+    .menu {
+        .button {
+            margin: 0 12px;
+            border-radius: 10px;
+            
+            &:hover {
+                background-color: #828282;
+            }
+
+            img {
+                padding: 21px;
+                position: relative;
+                top: 1px;
+            }
+        }
+    }
+}

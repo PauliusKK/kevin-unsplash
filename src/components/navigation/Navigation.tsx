@@ -1,14 +1,22 @@
 import React from 'react';
+import Logo from '../../assets/images/logo.svg';
+import PhotosIcon from '../../assets/images/photos2.svg';
+import FavouritesIcon from '../../assets/images/favourites2.svg';
 
 import './scss/navigation.scss';
 
-// export interface Navigation {
-//   children: React.ReactNode;
-//   className?: string;
-// }
-
 export const Navigation = () => (
   <div className="navigation">
-    {'Heres our navigation Logo And button centered And whole navigation display: fixed or position: fixed'}
+    <div className="logo">
+      <img src={Logo} alt="kevin." />
+    </div>
+    <div className="menu">
+      <div className="button">
+        <img src={PhotosIcon} />
+      </div>
+      <div className="button">
+        <img src={FavouritesIcon} />
+      </div>
+    </div>
   </div>
 );
