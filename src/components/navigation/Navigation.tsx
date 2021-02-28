@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../../assets/images/logo.svg';
-import PhotosIcon from '../../assets/images/photos2.svg';
-import FavouritesIcon from '../../assets/images/favourites2.svg';
+import PhotosIcon from '../../assets/images/photos.svg';
+import FavouritesIcon from '../../assets/images/favourites.svg';
 
 import './scss/navigation.scss';
 
@@ -11,12 +12,16 @@ export const Navigation = () => (
       <img src={Logo} alt="kevin." />
     </div>
     <div className="menu">
-      <div className="button">
-        <img src={PhotosIcon} />
-      </div>
-      <div className="button">
-        <img src={FavouritesIcon} />
-      </div>
+      <Link to="/photos">
+        <div className="button">
+          <img src={PhotosIcon} alt="photos" />
+        </div>
+      </Link>
+      <Link to="/favourites">
+        <div className="button">
+          <img src={FavouritesIcon} alt="favourites" />
+        </div>
+      </Link>
     </div>
   </div>
 );

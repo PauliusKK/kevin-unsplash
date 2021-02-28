@@ -3,13 +3,17 @@ import Masonry from 'react-masonry-css';
 
 import './scss/photos-masonry.scss';
 
-interface Photo {
-  id: string;
-  source: string;
-  alt: string;
-}
+// interface Photo {
+//   id: string;
+//   source: string;
+//   alt: string;
+// }
+// export interface PhotosMasonryProps {
+//   photos: Photo[];
+// }
+
 export interface PhotosMasonryProps {
-  photos: Photo[];
+  children: React.ReactNode;
 }
 
 const breakpointColumns = {
@@ -19,18 +23,12 @@ const breakpointColumns = {
   500: 1
 };
 
-export const PhotosMasonry = ({ photos }: PhotosMasonryProps) => (
+export const PhotosMasonry = ({ children }: PhotosMasonryProps) => (
   <Masonry
     breakpointCols={breakpointColumns}
     className="masonry-container"
     columnClassName="masonry-column"
   >
-    {photos.map((photo: any) => {
-        return (
-        <div key={photo.id} className="photo-box">
-            <img src={photo.source} alt={photo.alt} />
-        </div>
-        )
-    })}
+    {children}
   </Masonry>
 );
