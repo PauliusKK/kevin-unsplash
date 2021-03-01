@@ -18,7 +18,7 @@ export const deleteLiked = (photo: any) => ({
   payload: {...photo, liked: false},
 });
 
-export const setModal = (status: any) => ({
+export const setModalOpen = (status: any) => ({
   type: SET_MODAL,
   payload: status,
 });

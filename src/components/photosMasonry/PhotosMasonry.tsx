@@ -1,19 +1,16 @@
 import React from 'react';
 import Masonry from 'react-masonry-css';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setModalOpen } from '../../actions/rootActions';
+import { Photo } from '../modal'
+import SmallLikedIcon from '../../assets/images/small-heart.svg';
 
 import './scss/photos-masonry.scss';
 
-// interface Photo {
-//   id: string;
-//   source: string;
-//   alt: string;
-// }
-// export interface PhotosMasonryProps {
-//   photos: Photo[];
-// }
-
 export interface PhotosMasonryProps {
-  children: React.ReactNode;
+  photos: Photo[];
+  loadLiked?: boolean,
 }
 
 const breakpointColumns = {
@@ -23,12 +20,32 @@ const breakpointColumns = {
   500: 1
 };
 
-export const PhotosMasonry = ({ children }: PhotosMasonryProps) => (
-  <Masonry
-    breakpointCols={breakpointColumns}
-    className="masonry-container"
-    columnClassName="masonry-column"
-  >
-    {children}
-  </Masonry>
-);
+export const PhotosMasonry = ({ photos, loadLiked = false }: PhotosMasonryProps) => {
+  const dispatch = useDispatch();
+
+  return (
+    <Masonry
+      breakpointCols={breakpointColumns}
+      className="masonry-container"
+      columnClassName="masonry-column"
+    >
+      {photos.map((photo: any) => (
+        <div key={photo.id} className="photo-box">
+
+          {photo && photo.liked && (
+            <div className="liked-box">
+              <img src={SmallLikedIcon} alt={'Liked'} className="liked" />
+            </div>
+          )}
+
+          <Link
+            to={loadLiked ? `/liked/${photo.id}` : `/photos/${photo.id}`}
+            onClick={() => dispatch(setModalOpen(true))}
+          >
+            <img src={photo.regularSource} alt={photo.alt} />
+          </Link>
+        </div>
+      ))}
+    </Masonry>
+  )
+};

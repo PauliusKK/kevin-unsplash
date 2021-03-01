@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { findIndex } from 'lodash';
-import { ADD_PHOTOS, SET_LIKED, addPhotos } from '../actions/rootActions';
+import { ADD_PHOTOS, SET_LIKED, SET_MODAL, addPhotos } from '../actions/rootActions';
 
 const ACCESS_KEY = 'ddil7YUnQlHCNdp-MCUY0fOyfn232dWxHQJcQvAWIUU';
 
@@ -19,7 +19,7 @@ interface InitialAppState {
 
 export const initialState: InitialAppState = {
   photos: [],
-  isModalOpen: false, // or true, depends.
+  isModalOpen: true,
 };
 
 export const rootReducer = (state = initialState, action: any) => {
@@ -36,9 +36,9 @@ export const rootReducer = (state = initialState, action: any) => {
 
       return { ...state, photos: [...state.photos] };
     }
-    // case SET_MODAL: {
-    //   return { ...state, isModalOpen: action.payload }
-    // }
+    case SET_MODAL: {
+      return { ...state, isModalOpen: action.payload }
+    }
     default:
       return state
   }
