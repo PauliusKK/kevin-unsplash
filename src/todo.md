@@ -6,17 +6,17 @@
 
 -- add loader
 
--- add lint
-
 -- add infinite scrolling / loading
 
 -- add BEM
 
 -- add unit tests with Jest or Enzyme
 
--- add save from Redux store to localstorage then rehydrade on load.
-
 -- add small animations
 
 -- add custom webpack config
+
+-- add 404 or <NoMatch> in <Router>
+
+-- MAKE IT RESPONSIVE!
 

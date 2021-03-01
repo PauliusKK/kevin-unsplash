@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { throttle } from 'lodash';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -7,13 +8,16 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { rootReducer } from './reducers/rootReducer';
+import { loadState, saveState } from './localStorage';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const persistedState = loadState();
+const store = createStore(rootReducer, persistedState, applyMiddleware(thunk),);
 
-// store.subscribe(() => {
-//   console.log('store updated.');
-//   console.log(store.getState());
-// })
+store.subscribe(throttle(() => {
+  saveState({
+    photos: store.getState().photos
+  });
+}, 1000));
 
 ReactDOM.render(
   <React.StrictMode>

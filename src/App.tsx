@@ -5,7 +5,6 @@ import { PhotosMasonry } from './components/photosMasonry';
 import { Modal } from './components/modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPhotos } from './reducers/rootReducer';
-// import Loader from './assets/images/loader.svg';
 import './App.scss';
 
 function App() {
