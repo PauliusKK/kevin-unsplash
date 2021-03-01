@@ -1,82 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Modal from 'react-modal';
+import classnames from 'classnames';
 import { Navigation } from './components/navigation';
 import { PhotosMasonry } from './components/photosMasonry';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPhotos } from './reducers/rootReducer';
+import { addLiked, deleteLiked } from './actions/rootActions';
 import Loader from './assets/images/loader.svg';
 import CloseIcon from './assets/images/close.svg';
 import DefaultAuthorIcon from './assets/images/default-author.svg';
+import SmallLikedIcon from './assets/images/small-heart.svg';
 import './App.scss';
 
-const ACCESS_KEY = 'OSt_9Mgrjej5AEkCijPYhOB8nupoeTVQ9FH2MJjuvr8';
-
-const unsplash = axios.create({
-  baseURL: 'https://api.unsplash.com',
-});
-
-unsplash.defaults.headers.common['Authorization'] = `Client-ID ${ACCESS_KEY}`;
-
 function App() {
-  const [unsplashPage, setUnsplashPage] = useState(1);
-  const [photos, setPhotos] = useState<any[]>([]);
+  const photos = useSelector((state: any) => state.photos);
+  const dispatch = useDispatch();
   const [isOpen, setOpen] = useState(true);
 
   useEffect(() => {
-    fetchPhotos();
-  }, []);
-
-  const fetchPhotos = () => {
-    unsplash.get('/photos', {
-      params: {
-        page: unsplashPage,
-        per_page: 30,
-      }
-    })
-    .then((response) => {
-      // console.log(response);
-      const newPhotos = response.data.map((photo: any) => {
-        const { id, urls, alt_description: alt, description, user } = photo;
-        const { regular: regularSource, full: fullSource } = urls;
-        const {
-          profile_image,
-          name,
-          twitter_username: twitter,
-          instagram_username: instagram,
-          username,
-          total_likes: likes,
-          total_photos: allPhotos,
-          total_collections: collections,
-        } = user;
-  
-        return {
-          id,
-          regularSource,
-          fullSource,
-          alt: alt || 'No Description',
-          description: description ? description : alt ? alt : 'No Description',
-          profilePicture: profile_image.small,
-          name: name || 'Unknown',
-          user: {
-            twitter: `@${twitter}` || 'Unknown',
-            instagram: `@${instagram}` || 'Unknown',
-            username: username || 'Unknown',
-            likes: likes || 0,
-            allPhotos: allPhotos || 0,
-            collections: collections || 0,
-          }
-        }
-      });
-      // console.log('set photos');
-      const allPhotos = [...photos, ...newPhotos];
-      setPhotos(allPhotos);
-      setUnsplashPage(unsplashPage + 1);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-  }
+    dispatch(getPhotos());
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -84,9 +29,23 @@ function App() {
         <Route exact path="/">
           <Redirect to="/photos" />
         </Route>
-        <Route path="/favourites" render={(() => (
+        <Route path="/liked" render={(() => (
           <>
             <Navigation />
+            <PhotosMasonry>
+              {photos.filter((photo: any) => photo.liked).map((photo: any) => (
+                <div key={photo.id} className="photo-box">
+                  {photo && photo.liked && (
+                    <div className="liked-box">
+                      <img src={SmallLikedIcon} alt={'Liked'} className="liked" />
+                    </div>
+                  )}
+                  <Link to={`/liked/${photo.id}`} onClick={() => setOpen(true)}>
+                    <img src={photo.regularSource} alt={photo.alt} />
+                  </Link>
+                </div>
+              ))}
+            </PhotosMasonry>
           </>
         ))} />
         <Route path="/photos" render={() => (
@@ -94,13 +53,19 @@ function App() {
             <Navigation />
             <InfiniteScroll
               dataLength={photos.length}
-              next={fetchPhotos}
+              next={console.log("Its broken duude") as any}
+              // next={getPhotos() as any} // it is fucking broke
               hasMore={true}
               loader={<img src={Loader} alt="Loading..." />}
             >
               <PhotosMasonry>
                 {photos.map((photo: any) => (
                   <div key={photo.id} className="photo-box">
+                    {photo && photo.liked && (
+                      <div className="liked-box">
+                        <img src={SmallLikedIcon} alt={'Liked'} className="liked" />
+                      </div>
+                    )}
                     <Link to={`/photos/${photo.id}`} onClick={() => setOpen(true)}>
                       <img src={photo.regularSource} alt={photo.alt} />
                     </Link>
@@ -110,8 +75,14 @@ function App() {
             </InfiniteScroll>
           </>
         )} />
-        <Route path="/photos/:photoId" render={({ match }: any) => {
-          const photo = photos.find(photo => photo.id === match.params.photoId);
+        <Route path={["/photos/:photoId", "/liked/:photoId"]} render={({ match }: any) => {
+          const photo = photos.find((photo: any) => photo.id === match.params.photoId);
+
+          console.log('match', match);
+
+          if (!photo || (match.path === '/liked/:photoId' && !photo.liked)) { // modal disappear on unlike in /liked/id
+            return false;
+          }
 
           return (
             <Modal
@@ -122,21 +93,32 @@ function App() {
               className="modal"
             >
               <div className="image-box">
-                {photo && photo.fullSource && photo.alt && (
+                {photo.fullSource && photo.alt && (
                   <img src={photo.fullSource} alt={photo.alt} />
                 )}
               </div>
+
               <div className="description-box">
                 <div className="cta-box">
-                  <button className="like">
-                    Like
+                  <button
+                    className={classnames('cta',
+                      photo.liked && 'liked'
+                    )}
+                    onClick={() => {
+                      photo.liked ? dispatch(deleteLiked(photo)) : dispatch(addLiked(photo))
+                    }}
+                  >
+                    <img src={SmallLikedIcon} alt={'icon'} />
+                    <span>{photo.liked ? 'Unlike' : 'Like'}</span>
                   </button>
                   <button className="modal-close" onClick={() => setOpen(false)}>
                     <img src={CloseIcon} alt="Close" />
                   </button>
                 </div>
-                {photo && photo.description && <h2 className="description">{photo.description}</h2>}
-                {photo && photo.name && (
+
+                {photo.description && <h2 className="description">{photo.description}</h2>}
+
+                {photo.name && (
                   <div className="author-info">
                     <img
                       src={photo.profilePicture ? photo.profilePicture : DefaultAuthorIcon}
@@ -146,9 +128,10 @@ function App() {
                     <span className="author-name">{photo.name}</span>
                   </div>
                 )}
+
                 <div className="specifications">
                   <div className="info-box">
-                    {photo && photo.user && Object.entries(photo.user).map(([key, value]: any) => (
+                    {photo.user && Object.entries(photo.user).map(([key, value]: any) => (
                       <div className="specification">
                         <p>{key}</p>
                         <h5>{value}</h5>

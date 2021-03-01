@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/images/logo.svg';
 import PhotosIcon from '../../assets/images/photos.svg';
-import FavouritesIcon from '../../assets/images/favourites.svg';
+import LikedIcon from '../../assets/images/heart.svg';
 
 import './scss/navigation.scss';
 
@@ -19,9 +19,9 @@ export const Navigation = () => (
           <img src={PhotosIcon} alt="photos" />
         </div>
       </Link>
-      <Link to="/favourites">
+      <Link to="/liked">
         <div className="button">
-          <img src={FavouritesIcon} alt="favourites" />
+          <img src={LikedIcon} alt="liked" />
         </div>
       </Link>
     </div>

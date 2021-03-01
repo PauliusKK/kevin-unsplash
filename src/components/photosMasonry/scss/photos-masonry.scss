@@ -12,9 +12,28 @@
 
 .photo-box {
   margin-bottom: 22px;
-}
+  position: relative;
 
-.photo-box img {
-  width: 100%;
-  border-radius: 10px;
+  .liked-box {
+    width: 32px;
+    height: 32px;
+    background-color: #2D9CDB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    border-radius: 10px;
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  img:not(.liked) {
+    width: 100%;
+    border-radius: 10px;
+  }
 }

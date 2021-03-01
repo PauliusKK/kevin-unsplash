@@ -3,10 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { rootReducer } from './reducers/rootReducer';
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+store.subscribe(() => {
+  console.log('store updated.');
+  console.log(store.getState());
+})
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

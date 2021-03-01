@@ -10,9 +10,8 @@ body {
 .modal {
   max-width: 988px;
   margin: auto;
-  border-radius: 10px;
   max-height: 650px;
-  min-height: 250px; // change me later
+  min-height: 650px; // change me later
   min-width: 988px;
   display: flex;
   outline: none;
@@ -21,6 +20,8 @@ body {
     width: 50%;
     background-color: rgba(43, 43, 43, 0.7);
     display: flex;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 
     img {
       max-width: 100%;
@@ -35,9 +36,33 @@ body {
     display: flex;
     flex-direction: column;
     padding: 25px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 
     .cta-box {
       display: flex;
+
+      .cta {
+        background-color: #3C3C3C;
+        color: #F2F2F2;
+        border: none;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        outline: none;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+
+        img {
+          margin-right: 10px;
+        }
+
+        &.liked {
+          background-color: #2D9CDB;
+        }
+      }
 
       .modal-close {
         margin-left: auto;
