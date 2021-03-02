@@ -60,14 +60,14 @@ export const PhotosMasonry = ({ photos, loadLiked = false }: PhotosMasonryProps)
       >
         <Masonry
           breakpointCols={breakpointColumns}
-          className="masonry-container"
-          columnClassName="masonry-column"
+          className="photos-container__masonry-container"
+          columnClassName="photos-container__masonry-column"
         >
           {photos.map((photo: any) => (
             <div key={photo.id} className="photo-box">
 
               {photo && photo.liked && (
-                <div className="liked-box">
+                <div className="photo-box__liked-box">
                   <img src={SmallLikedIcon} alt={'Liked'} className="liked" />
                 </div>
               )}

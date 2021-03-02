@@ -1,16 +1,9 @@
-// TODO
+// TODO by priority
 
--- add global variable for SCSS for 700px and use it everywhere
-
--- add BEM
+-- fix warnings.
 
 -- add unit tests with Jest or Enzyme
 
--- add small animations
+-- (if some time left) add custom webpack config
 
--- add custom webpack config
-
--- add 404 or <NoMatch> in <Router>
-
--- (maybe) fix warnings.
-
+-- CHANGE MAX PHOTOS TO LOAD TO 180

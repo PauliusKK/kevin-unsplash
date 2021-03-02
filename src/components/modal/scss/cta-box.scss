@@ -1,41 +1,50 @@
-.cta-box {
-  display: flex;
-
-  .cta {
-    background-color: #3C3C3C;
-    color: #F2F2F2;
-    border: none;
-    border-radius: 10px;
+.modal {
+  &__cta-box {
     display: flex;
-    align-items: center;
-    padding: 8px;
-    outline: none;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-
-    img {
-      margin-right: 10px;
+  
+    &--cta {
+      background-color: #3C3C3C;
+      color: #F2F2F2;
+      border: none;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      outline: none;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      cursor: pointer;
+      transition: linear 0.25s;
+  
+      img {
+        margin-right: 10px;
+      }
     }
 
-    &.liked {
+    &--liked {
       background-color: #2D9CDB;
     }
-  }
-
-  .modal-close {
-    margin-left: auto;
-    border: none;
-    background-color: #3C3C3C;
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    cursor: pointer;
-    outline: none;
-
-    img {
-      position: relative;
-      top: 1px;
+  
+    &--modal-close {
+      margin-left: auto;
+      border: none;
+      background-color: #3C3C3C;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      cursor: pointer;
+      outline: none;
+      transition: ease-in-out 0.15s;
+  
+      img {
+        position: relative;
+        top: 1px;
+      }
+  
+      &:hover {
+        background-color: darken(#3C3C3C, 10%);
+      }
     }
   }
 }

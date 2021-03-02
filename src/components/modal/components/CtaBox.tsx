@@ -13,9 +13,9 @@ export const CtaBox = ({ photo }: PhotoProps) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="cta-box">
+    <div className="modal__cta-box">
       <button
-        className={classnames('cta', photo.liked && 'liked')}
+        className={classnames('modal__cta-box--cta', photo.liked && 'modal__cta-box--liked')}
         onClick={() => {
           photo.liked ? dispatch(deleteLiked(photo)) : dispatch(addLiked(photo))
         }}
@@ -24,7 +24,7 @@ export const CtaBox = ({ photo }: PhotoProps) => {
         <span>{photo.liked ? 'Unlike' : 'Like'}</span>
       </button>
 
-      <button className="modal-close" onClick={() => dispatch(setModalOpen(false))}>
+      <button className="modal__cta-box--modal-close" onClick={() => dispatch(setModalOpen(false))}>
         <img src={CloseIcon} alt="Close" />
       </button>
     </div>

@@ -1,27 +1,29 @@
+@import '../../../assets/scss/_variables.scss';
+
 .photos-container {
-  @media (max-width: 700px) {
+  @media (max-width: $mobile-700 + px) {
     height: calc(100vh - 80px);
     overflow: scroll;
   }
-}
 
-.masonry-container {
-  display: flex;
-  padding: 50px;
-  margin-left: 90px;
-
-  @media (max-width: 700px) {
-    padding: 25px;
-    margin-left: 0;
+  &__masonry-container {
+    display: flex;
+    padding: 50px;
+    margin-left: 90px;
+  
+    @media (max-width: $mobile-700 + px) {
+      padding: 25px;
+      margin-left: 0;
+    }
   }
-}
-
-.masonry-column {
-  padding-left: 25px;
-  background-clip: padding-box;
-
-  &:first-child {
-    padding-left: 0;
+  
+  &__masonry-column {
+    padding-left: 25px;
+    background-clip: padding-box;
+  
+    &:first-child {
+      padding-left: 0;
+    }
   }
 }
 
@@ -29,7 +31,7 @@
   margin-bottom: 22px;
   position: relative;
 
-  .liked-box {
+  &__liked-box {
     width: 32px;
     height: 32px;
     background-color: #2D9CDB;

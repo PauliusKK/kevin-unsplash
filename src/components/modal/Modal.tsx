@@ -24,30 +24,30 @@ export const Modal = ({ photo }: PhotoProps) => {
       ariaHideApp={false}
       className="modal"
     >
-      <div className="image-box">
+      <div className="modal__image-box">
         <CtaBox photo={photo} />
         {photo.fullSource && photo.alt && (
           <img src={photo.fullSource} alt={photo.alt} />
         )}
       </div>
 
-      <div className="description-box">
-        <div className="container">
+      <div className="modal__description-box">
+        <div className="modal__description-box--description-container">
           <CtaBox photo={photo} />
-          {photo.description && <h2 className="description">{photo.description}</h2>}
+          {photo.description && <h2 className="modal__description-box--description">{photo.description}</h2>}
           {photo.name && (
-            <div className="author-info">
+            <div className="modal__author">
               <img
                 src={photo.profilePicture ? photo.profilePicture : DefaultAuthorIcon}
                 alt={photo.name}
-                className="author-photo"
+                className="modal__author--photo"
               />
-              <span className="author-name">{photo.name}</span>
+              <span className="modal__author--name">{photo.name}</span>
             </div>
           )}
-          <div className="specifications">
+          <div className="modal__specifications">
             {photo.user && Object.entries(photo.user).map(([key, value]: any) => (
-              <div className="specification" key={key}>
+              <div className="modal__specifications--specification" key={key}>
                 <p>{key}</p>
                 <h5>{value}</h5>
               </div>
