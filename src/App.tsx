@@ -5,14 +5,14 @@ import { PhotosMasonry } from './components/photosMasonry';
 import { Modal } from './components/modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPhotos } from './reducers/rootReducer';
-import './App.scss';
+import { setModalOpen } from './actions/rootActions';
 
 function App() {
   const photos = useSelector((state: any) => state.photos);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPhotos());
+    photos.length <= 1 && dispatch(getPhotos());
   }, [dispatch]);
 
   return (
@@ -45,6 +45,7 @@ function App() {
               return false;
             }
 
+            dispatch(setModalOpen(true));
             return <Modal photo={photo} />
           }}
         />

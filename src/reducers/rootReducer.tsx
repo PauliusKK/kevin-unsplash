@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { findIndex } from 'lodash';
+import { findIndex, uniqBy } from 'lodash';
 import { ADD_PHOTOS, SET_LIKED, SET_MODAL, addPhotos } from '../actions/rootActions';
 
 const ACCESS_KEY = 'ddil7YUnQlHCNdp-MCUY0fOyfn232dWxHQJcQvAWIUU';
@@ -44,7 +44,7 @@ export const rootReducer = (state = initialState, action: any) => {
   }
 }
 
-export const getPhotos = () => (dispatch: any) => {  
+export const getPhotos = () => (dispatch: any) => {
   unsplash.get('/photos', {
     params: {
       page: unsplashPage,
@@ -85,7 +85,8 @@ export const getPhotos = () => (dispatch: any) => {
       }
     });
 
-    dispatch(addPhotos(photos));
+    const uniqPhotos = uniqBy(photos, 'id');
+    dispatch(addPhotos(uniqPhotos));
     unsplashPage++;
   })
   .catch(function (error) {

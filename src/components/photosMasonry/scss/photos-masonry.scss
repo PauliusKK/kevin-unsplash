@@ -1,13 +1,28 @@
+.photos-container {
+  @media (max-width: 700px) {
+    height: calc(100vh - 80px);
+    overflow: scroll;
+  }
+}
+
 .masonry-container {
   display: flex;
-  margin-left: -5px;
   padding: 50px;
   margin-left: 90px;
+
+  @media (max-width: 700px) {
+    padding: 25px;
+    margin-left: 0;
+  }
 }
 
 .masonry-column {
   padding-left: 25px;
   background-clip: padding-box;
+
+  &:first-child {
+    padding-left: 0;
+  }
 }
 
 .photo-box {

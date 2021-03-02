@@ -11,12 +11,10 @@ import { rootReducer } from './reducers/rootReducer';
 import { loadState, saveState } from './localStorage';
 
 const persistedState = loadState();
-const store = createStore(rootReducer, persistedState, applyMiddleware(thunk),);
+const store = createStore(rootReducer, persistedState, applyMiddleware(thunk));
 
 store.subscribe(throttle(() => {
-  saveState({
-    photos: store.getState().photos
-  });
+  saveState(store.getState());
 }, 1000));
 
 ReactDOM.render(
