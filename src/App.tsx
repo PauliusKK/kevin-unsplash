@@ -1,14 +1,27 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, RouteComponentProps } from 'react-router-dom';
 import { Navigation } from './components/navigation';
-import { PhotosMasonry } from './components/photosMasonry';
+import { Photo, PhotosMasonry } from './components/photosMasonry';
 import { Modal } from './components/modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPhotos } from './reducers/rootReducer';
 import { setModalOpen } from './actions/rootActions';
 
-export const App = () => {
-  const photos = useSelector((state: any) => state.photos);
+export interface RootState {
+  photos: Photo[];
+  isModalOpen: boolean;
+}
+
+interface MatchParams {
+  name: string;
+  photoId: string;
+}
+
+interface MatchProps extends RouteComponentProps<MatchParams> { // eslint-disable-line
+}
+
+export const App = () => { // eslint-disable-line
+  const photos = useSelector((state: RootState) => state.photos);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,7 +38,7 @@ export const App = () => {
           path="/liked" render={(() => (
             <>
               <Navigation />
-              <PhotosMasonry photos={photos.filter((photo: any) => photo.liked)} loadLiked />
+              <PhotosMasonry photos={photos.filter((photo: Photo) => photo.liked)} loadLiked />
             </>
           ))}
         />
@@ -38,8 +51,8 @@ export const App = () => {
           )}
         />
         <Route
-          path={["/photos/:photoId", "/liked/:photoId"]} render={({ match }: any) => {
-            const photo = photos.find((photo: any) => photo.id === match.params.photoId);
+          path={["/photos/:photoId", "/liked/:photoId"]} render={({ match }: MatchProps) => {
+            const photo = photos.find((photo: Photo) => photo.id === match.params.photoId);
 
             if (!photo || (match.path === '/liked/:photoId' && !photo.liked)) { // modal disappear on unlike in /liked/id
               return false;

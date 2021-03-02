@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { findIndex, uniqBy } from 'lodash';
 import { ADD_PHOTOS, SET_LIKED, SET_MODAL, addPhotos } from '../actions/rootActions';
+import { Photo } from '../components/photosMasonry';
+import { Dispatch } from 'redux';
 
 const ACCESS_KEY = 'ddil7YUnQlHCNdp-MCUY0fOyfn232dWxHQJcQvAWIUU';
 
@@ -13,7 +15,7 @@ let unsplashPage = 1;
 unsplash.defaults.headers.common['Authorization'] = `Client-ID ${ACCESS_KEY}`;
 
 interface InitialAppState {
-  photos: any[];
+  photos: Photo[];
   isModalOpen: boolean;
 }
 
@@ -22,13 +24,33 @@ export const initialState: InitialAppState = {
   isModalOpen: true,
 };
 
-export const rootReducer = (state = initialState, action: any) => {
+interface GetPhoto {
+  alt_description: string;
+  description: string;
+  id: string;
+  user: {
+    profile_image: string;
+    name: string;
+    twitter_username: string;
+    instagram_username: string;
+    username: string;
+    total_likes: number;
+    total_photos: number;
+    total_collections: number;
+  }
+  urls: {
+    regular: string;
+    full: string;
+  }
+}
+
+export const rootReducer = (state = initialState, action: any) => { // eslint-disable-line
   switch(action.type) {
     case ADD_PHOTOS: {
       return { ...state, photos: [...state.photos, ...action.payload] }
     }
     case SET_LIKED: {
-      const likedPhotoIndex = findIndex(state.photos, (photo: any) => {
+      const likedPhotoIndex = findIndex(state.photos, (photo: Photo) => {
         return photo.id === action.payload.id
       });
 
@@ -44,7 +66,7 @@ export const rootReducer = (state = initialState, action: any) => {
   }
 }
 
-export const getPhotos = () => (dispatch: any) => {
+export const getPhotos = () => (dispatch: Dispatch) => { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
   unsplash.get('/photos', {
     params: {
       page: unsplashPage,
@@ -52,7 +74,7 @@ export const getPhotos = () => (dispatch: any) => {
     }
   })
   .then((response) => {
-    const photos = response.data.map((photo: any) => {
+    const photos = response.data.map((photo: GetPhoto) => {
       const { id, urls, alt_description: alt, description, user } = photo;
       const { regular: regularSource, full: fullSource } = urls;
       const {

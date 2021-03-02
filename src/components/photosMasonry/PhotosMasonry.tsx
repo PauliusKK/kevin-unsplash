@@ -28,11 +28,12 @@ export interface Photo {
   description: string;
   name: string;
   profilePicture: string;
+  regularSource: string;
   user: User;
 }
 
 export interface PhotosMasonryProps {
-  photos: Photo[];
+  photos?: Photo[];
   loadLiked?: boolean,
 }
 
@@ -47,15 +48,15 @@ const breakpointColumns = {
   500: 2
 };
 
-export const PhotosMasonry = ({ photos, loadLiked = false }: PhotosMasonryProps) => {
+export const PhotosMasonry = ({ photos, loadLiked = false }: PhotosMasonryProps) => { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
   const dispatch = useDispatch();
 
   return (
     <div className="photos-container">
       <InfiniteScroll
-        dataLength={photos.length}
+        dataLength={photos!.length} // eslint-disable-line @typescript-eslint/no-non-null-assertion
         next={() => dispatch(getPhotos())}
-        hasMore={loadLiked ? false : photos.length < 90}
+        hasMore={loadLiked ? false : photos!.length < 90} // eslint-disable-line @typescript-eslint/no-non-null-assertion
         loader={() => <Loader />}
       >
         <Masonry
@@ -63,7 +64,7 @@ export const PhotosMasonry = ({ photos, loadLiked = false }: PhotosMasonryProps)
           className="photos-container__masonry-container"
           columnClassName="photos-container__masonry-column"
         >
-          {photos.map((photo: any) => (
+          {photos!.map((photo: Photo) => ( // eslint-disable-line @typescript-eslint/no-non-null-assertion
             <div key={photo.id} className="photo-box">
 
               {photo && photo.liked && (

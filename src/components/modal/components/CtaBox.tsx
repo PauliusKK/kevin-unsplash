@@ -9,7 +9,7 @@ import SmallLikedIcon from '../../../assets/images/small-heart.svg';
 
 import '../scss/cta-box.scss';
 
-export const CtaBox = ({ photo }: PhotoProps) => {
+export const CtaBox = ({ photo }: PhotoProps) => { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
   const dispatch = useDispatch();
 
   return (

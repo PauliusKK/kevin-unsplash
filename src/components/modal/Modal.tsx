@@ -7,13 +7,14 @@ import DefaultAuthorIcon from '../../assets/images/default-author.svg';
 
 import './scss/modal.scss';
 import { CtaBox } from './components/CtaBox';
+import { RootState } from '../../App';
 
 export interface PhotoProps {
   photo: Photo;
 }
 
-export const Modal = ({ photo }: PhotoProps) => {
-  const isModalOpen = useSelector((state: any) => state.isModalOpen);
+export const Modal = ({ photo }: PhotoProps) => { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
+  const isModalOpen = useSelector((state: RootState) => state.isModalOpen);
   const dispatch = useDispatch();
 
   return (
@@ -46,7 +47,7 @@ export const Modal = ({ photo }: PhotoProps) => {
             </div>
           )}
           <div className="modal__specifications">
-            {photo.user && Object.entries(photo.user).map(([key, value]: any) => (
+            {photo.user && Object.entries(photo.user).map(([key, value]): any => ( // eslint-disable-line @typescript-eslint/no-explicit-any
               <div className="modal__specifications--specification" key={key}>
                 <p>{key}</p>
                 <h5>{value}</h5>

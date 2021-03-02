@@ -7,7 +7,7 @@ import LikedIcon from '../../assets/images/heart.svg';
 
 import './scss/navigation.scss';
 
-export const Navigation = () => (
+export const Navigation = () => ( // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
   <div className="navigation">
     <Link to="/" className="navigation__logo">
       <img src={Logo} alt="kevin." />
