@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App test suite ComponentApp renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="App"
+  >
+    <div
+      class="navigation"
+    >
+      <a
+        class="navigation__logo"
+        href="/"
+      >
+        <img
+          alt="kevin."
+          src="logo.svg"
+        />
+      </a>
+      <div
+        class="navigation__menu"
+      >
+        <a
+          class="navigation__button navigation__button--active"
+          href="/photos"
+        >
+          <img
+            alt="photos"
+            src="photos.svg"
+          />
+        </a>
+        <a
+          class="navigation__button"
+          href="/liked"
+        >
+          <img
+            alt="liked"
+            src="heart.svg"
+          />
+        </a>
+      </div>
+    </div>
+    <div
+      class="photos-container"
+    >
+      <div
+        class="infinite-scroll-component__outerdiv"
+      >
+        <div
+          class="infinite-scroll-component "
+          style="height: auto; overflow: auto;"
+        >
+          <div
+            class="photos-container__masonry-container"
+          >
+            <div
+              class="photos-container__masonry-column"
+              style="width: 25%;"
+            >
+              <div
+                class="photo-box"
+              >
+                <div
+                  class="photo-box__liked-box"
+                >
+                  <img
+                    alt="Liked"
+                    class="liked"
+                    src="small-heart.svg"
+                  />
+                </div>
+                <a
+                  href="/photos/TQmnNr9odYs"
+                >
+                  <img
+                    alt="person in brown long sleeve shirt using silver Surface"
+                    src="https://images.unsplash.com/photo-1612832021455-245704c6755a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMTA4Mzd8MXwxfGFsbHwxfHx8fHx8Mnw&ixlib=rb-1.2.1&q=80&w=1080"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

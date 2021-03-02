@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { App } from './App';
+import { PhotosMasonry } from '../PhotosMasonry';
 
 const mockStore = configureMockStore([thunk]);
 
@@ -28,8 +28,8 @@ const samplePhotos = [{
   }
 }];
 
-describe('App test suite', () => {
-  describe('ComponentApp', () => {
+describe('PhotosMasonry test suite', () => {
+  describe('ComponentPhotosMasonry', () => {
     test('renders correctly', () => {
       const store = mockStore({
         photos: samplePhotos
@@ -37,7 +37,7 @@ describe('App test suite', () => {
       const { asFragment } = render(
         <Provider store={store}>
           <Router>
-            <App />
+            <PhotosMasonry photos={store.photos || samplePhotos} />
           </Router>
         </Provider>
       );

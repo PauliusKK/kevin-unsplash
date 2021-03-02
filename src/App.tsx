@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getPhotos } from './reducers/rootReducer';
 import { setModalOpen } from './actions/rootActions';
 
-function App() {
+export const App = () => {
   const photos = useSelector((state: any) => state.photos);
   const dispatch = useDispatch();
 

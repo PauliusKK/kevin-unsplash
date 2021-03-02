@@ -5,11 +5,11 @@ import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { App } from './App';
+import { Modal } from '../Modal';
 
 const mockStore = configureMockStore([thunk]);
 
-const samplePhotos = [{
+const samplePhoto = {
   alt: "person in brown long sleeve shirt using silver Surface",
   description: "person in brown long sleeve shirt using silver Surface",
   fullSource: "https://images.unsplash.com/photo-1612832021455-245704c6755a?crop=entropy&cs=srgb&fm=jpg&ixid=MXwyMTA4Mzd8MXwxfGFsbHwxfHx8fHx8Mnw&ixlib=rb-1.2.1&q=85",
@@ -26,18 +26,18 @@ const samplePhotos = [{
     twitter: "@surface",
     username: "surface"
   }
-}];
+};
 
-describe('App test suite', () => {
-  describe('ComponentApp', () => {
+describe('Modal test suite', () => {
+  describe('ComponentModal', () => {
     test('renders correctly', () => {
       const store = mockStore({
-        photos: samplePhotos
+        photo: samplePhoto,
       });
       const { asFragment } = render(
         <Provider store={store}>
           <Router>
-            <App />
+            <Modal photo={store.photo || samplePhoto} />
           </Router>
         </Provider>
       );

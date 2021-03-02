@@ -70,6 +70,7 @@
     "react-refresh": "^0.8.3",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
+    "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "resolve": "1.18.1",
     "resolve-url-loader": "^3.1.2",
@@ -91,7 +92,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
+    "test": "jest",
     "lint": "eslint ./src --ext .tsx,.ts && sass-lint -v -q"
   },
   "eslintConfig": {
