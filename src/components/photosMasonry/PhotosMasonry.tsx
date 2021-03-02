@@ -56,7 +56,7 @@ export const PhotosMasonry = ({ photos, loadLiked = false }: PhotosMasonryProps)
       <InfiniteScroll
         dataLength={photos!.length} // eslint-disable-line @typescript-eslint/no-non-null-assertion
         next={() => dispatch(getPhotos())}
-        hasMore={loadLiked ? false : photos!.length < 90} // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        hasMore={loadLiked ? false : photos!.length < 180} // eslint-disable-line @typescript-eslint/no-non-null-assertion
         loader={() => <Loader />}
       >
         <Masonry
