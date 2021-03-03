@@ -47,7 +47,7 @@ interface GetPhoto {
 export const rootReducer = (state = initialState, action: any) => { // eslint-disable-line
   switch(action.type) {
     case ADD_PHOTOS: {
-      return { ...state, photos: [...state.photos, ...action.payload] }
+      return { ...state, photos: uniqBy([...state.photos, ...action.payload], 'id') }
     }
     case SET_LIKED: {
       const likedPhotoIndex = findIndex(state.photos, (photo: Photo) => {
@@ -74,7 +74,7 @@ export const getPhotos = () => (dispatch: Dispatch) => { // eslint-disable-line 
     }
   })
   .then((response) => {
-    const photos = response.data.map((photo: GetPhoto) => {
+    const newPhotos = response.data.map((photo: GetPhoto) => {
       const { id, urls, alt_description: alt, description, user } = photo;
       const { regular: regularSource, full: fullSource } = urls;
       const {
@@ -106,9 +106,11 @@ export const getPhotos = () => (dispatch: Dispatch) => { // eslint-disable-line 
         }
       }
     });
-
-    const uniqPhotos = uniqBy(photos, 'id');
-    dispatch(addPhotos(uniqPhotos));
+    // console.log('state.photos', state);
+    // const storedPhotos = state.photos;
+    // const combinedPhotos = [...storedPhotos, ...newPhotos];
+    // const uniqPhotos = uniqBy(combinedPhotos, 'id');
+    dispatch(addPhotos(newPhotos));
     unsplashPage++;
   })
   .catch(function (error) {

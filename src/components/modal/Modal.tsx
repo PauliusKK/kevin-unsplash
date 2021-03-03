@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setModalOpen } from '../../actions/rootActions';
 import { Photo } from '../photosMasonry'
@@ -13,14 +14,23 @@ export interface PhotoProps {
   photo: Photo;
 }
 
+export interface ParamsTypes {
+  photoId: string;
+}
+
 export const Modal = ({ photo }: PhotoProps) => { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
   const isModalOpen = useSelector((state: RootState) => state.isModalOpen);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { photoId  } = useParams<ParamsTypes>();
 
   return (
     <ReactModal
       isOpen={isModalOpen}
-      onRequestClose={() => dispatch(setModalOpen(false))}
+      onRequestClose={() => {
+        dispatch(setModalOpen(false));
+        history.push(history.location.pathname.replace(photoId, ''));
+      }}
       style={{ overlay: { display: 'flex', zIndex: 999, backgroundColor: 'rgba(43, 43, 43, 0.7)' } }}
       ariaHideApp={false}
       className="modal"
