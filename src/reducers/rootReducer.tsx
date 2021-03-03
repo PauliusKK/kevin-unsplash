@@ -4,7 +4,7 @@ import { ADD_PHOTOS, SET_LIKED, SET_MODAL, addPhotos } from '../actions/rootActi
 import { Photo } from '../components/photosMasonry';
 import { Dispatch } from 'redux';
 
-const ACCESS_KEY = 'ddil7YUnQlHCNdp-MCUY0fOyfn232dWxHQJcQvAWIUU';
+const ACCESS_KEY = '';
 
 const unsplash = axios.create({
   baseURL: 'https://api.unsplash.com',
