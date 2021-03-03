@@ -1,3 +1,11 @@
+# Before you start!
+
+There is some bugs that I just wouldn't want to spend more time on fixing. Some typescript warnings were turned off by disabling the eslint. SCSS has 200 warnings, so you know, not worth fixing since you can see my style, structure and everything else, except that its not following the eslint so much.
+
+Enjoyed building this mini-app, it was fun to build the base for everything.
+
+MAKE SURE: you add your unsplash API access key in order to get the photos from the API.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
